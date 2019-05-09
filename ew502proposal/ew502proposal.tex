@@ -12,7 +12,8 @@
 \newcommand{\Later}{\textbf{Later.}}
 
 \title{Autonomous Drone Racing}
-\author{A.~Credle and D.~Evangelista\thanks{Authors are with the United States Naval Academy, Department of Weapons, Robotics, and Control Engineering}}
+\author{A.~Credle and D.~Evangelista}
+%\thanks{Authors are with the United States Naval Academy, Department of Weapons, Robotics, and Control Engineering}}
 \date{today}
 
 \begin{document}
@@ -25,6 +26,9 @@ Autonomous racing drones are not only beneficial to the drone racing sport, but 
 \section{Background and motivation}
 The concept of drone racing is straightforward: a group of people fly unmanned aerial vehicles (UAV) through gates, the first one to the finish line wins. The UAVs, or drones, come in a variety of sizes, ranging from an inch in diameter to over a foot, and are flown through communication with a remote controller. Races can take place in a variety of conditions including time of day and location. Gates can be configured in an unlimited number of patterns and often come in circular or rectangular form, though they are not limited to these shapes. Limitations are often placed on the power and size of drones that are raced, as owners are often expected to bring their own equipment. While the concept of racing is not new, drone racing is one of the fastest growing sports in the world (CITE). There are no limitations on age, gender, ethnicity, or physical prowess, making drone racing available to everyone.
 \begin{figure}
+\begin{center}
+\includegraphics[width=3in]{\myroot/figures/proposal-fig1.png}
+\end{center}
 \caption{Two drones racing}
 \label{fig1}
 \end{figure}
@@ -33,6 +37,9 @@ The concept of autonomous drone racing is even newer, though its potential goes 
 
 By mixing both an assumed path and gates for the drone to fly through, the exact location of the drone is not required; its relative location to the gates is all that is needed to fly a successful race. This concept will be critical for future autonomous systems, such as self-driving cars, that are required to navigate based on an assumed path mixed with the vehicles relative to the environmental objects or barriers (Fig. 1). For cars, the environmental objects would include lane lines, other vehicles, curbs, objects in the road, etc. By integrating objects of the environment into the core of the navigation process, autonomous vehicles will be able to keep both passengers, pedestrians, and wildlife safe. Autonomous vehicles of the future must be able to navigate based on both an assumed path and a relative location in order to efficiently and safely navigate dynamic environments.  
 \begin{figure}
+\begin{center}
+\includegraphics[width=3in]{\myroot/figures/proposal-fig2.png}
+\end{center}
 \caption{An autonomous car sensing its environment}
 \label{fig2}
 \end{figure}
@@ -154,14 +161,14 @@ This research will be conducted using Python, as it allows for high level contro
 
 
 \subsection{Budget}
-In order to conduct the physical experiment demonstrations, a set of drones and race-gates are necessary. The drone required a single camera, an IMU, and a flight controller. The DJI Tello drone was selected as it has all of the required parts and is easily programmable. The DJI Tello is already being used at USNA for capstone projects \cite{cuniff2019}, so there are readily available resources to help in the event that the drone breaks or malfunctions. In addition, the Vortex 180 drone was selected because it is a smaller standard sized racing drone and it fits all of the requirements for this research and is already in use in USNA SWAT-C and EW281. This drone will allow the research to get as close to true drone racing conditions as possible. Finally, the TBS gates were selected as they are sized for indoor drone racing and come with programmable lights. The lights allow for easy gate recognition during the first stages of experimental work as the lights in the testing room can be turned off and the gate lights turned on. This removed the background environment from the drone’s field of view, making gate recognition easier. The total labor, overhead, and material costs can be seen in Table~\ref{table-budget1}, and the breakdown of the out of pocket costs for materials can be seen in Table~\ref{table-budget2}.
-\begin{table}
-\caption{Labor, overhead, and materials costs}
-\label{table-budget1}
-\end{table}
-\begin{table}
-\caption{Out of pocket costs}
-\label{table-budget2}
+In order to conduct the physical experiment demonstrations, a set of drones and race-gates are necessary. The drone required a single camera, an IMU, and a flight controller. The DJI Tello drone was selected as it has all of the required parts and is easily programmable. The DJI Tello is already being used at USNA for capstone projects \cite{cuniff2019}, so there are readily available resources to help in the event that the drone breaks or malfunctions. In addition, the Vortex 180 drone was selected because it is a smaller standard sized racing drone and it fits all of the requirements for this research and is already in use in USNA SWAT-C and EW281. This drone will allow the research to get as close to true drone racing conditions as possible. Finally, the TBS gates were selected as they are sized for indoor drone racing and come with programmable lights. The lights allow for easy gate recognition during the first stages of experimental work as the lights in the testing room can be turned off and the gate lights turned on. This removed the background environment from the drone’s field of view, making gate recognition easier. The total labor, overhead, and material costs can be seen in Table~\ref{table-budget}A, and the breakdown of the out of pocket costs for materials can be seen in Table~\ref{table-budget}B.
+\begin{table}[hbp]
+\caption{(a) Labor, overhead, and materials costs. (b) Out of pocket costs.}
+\label{table-budget}
+\begin{center}
+\includegraphics[width=3in]{\myroot/figures/proposal-table1.png}
+\includegraphics[width=3in]{\myroot/figures/proposal-table2.png}
+\end{center}
 \end{table}
 
 
