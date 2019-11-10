@@ -11,6 +11,14 @@
 \newcommand{\myroot}{../}
 \newcommand{\Later}{\textbf{Later.}}
 
+\usepackage[plain]{fancyref}
+\renewcommand{\freffigname}{Fig.}
+\renewcommand{\Freffigname}{Fig.} 
+\renewcommand{\freftabname}{Table}
+\renewcommand{\Freftabname}{Table}
+\frefformat{plain}{\fancyrefeqlabelprefix}{(#1)} 
+\Frefformat{plain}{\fancyrefeqlabelprefix}{(#1)} 
+
 \title{Autonomous Drone Racing}
 \author{A.~Credle and D.~Evangelista}
 %\thanks{Authors are with the United States Naval Academy, Department of Weapons, Robotics, and Control Engineering}}
@@ -30,18 +38,18 @@ The concept of drone racing is straightforward: a group of people fly unmanned a
 \includegraphics[width=3in]{\myroot/figures/proposal-fig1.png}
 \end{center}
 \caption{Two drones racing}
-\label{fig1}
+\label{fig:1}
 \end{figure}
 
 The concept of autonomous drone racing is even newer, though its potential goes beyond that of its sport. In concept, a human drone racer goes through a series of ques and maneuvers to race the drone. If these ques and maneuvers are broken down into systematic steps, it is possible to automate the process and have the drone fly itself through the course. In modern autonomous vehicles, the specific location of the vehicle is often known, through GPS, a tracking system, etc. While this method of localization works for vehicles with static environments, it does not take into account the location of its surrounds, or the vehicles location in relation to specific objects. 
 
-By mixing both an assumed path and gates for the drone to fly through, the exact location of the drone is not required; its relative location to the gates is all that is needed to fly a successful race. This concept will be critical for future autonomous systems, such as self-driving cars, that are required to navigate based on an assumed path mixed with the vehicles relative to the environmental objects or barriers (Fig. 1). For cars, the environmental objects would include lane lines, other vehicles, curbs, objects in the road, etc. By integrating objects of the environment into the core of the navigation process, autonomous vehicles will be able to keep both passengers, pedestrians, and wildlife safe. Autonomous vehicles of the future must be able to navigate based on both an assumed path and a relative location in order to efficiently and safely navigate dynamic environments.  
+By mixing both an assumed path and gates for the drone to fly through, the exact location of the drone is not required; its relative location to the gates is all that is needed to fly a successful race. This concept will be critical for future autonomous systems, such as self-driving cars, that are required to navigate based on an assumed path mixed with the vehicles relative to the environmental objects or barriers (\fref{fig:1}). For cars, the environmental objects would include lane lines, other vehicles, curbs, objects in the road, etc. By integrating objects of the environment into the core of the navigation process, autonomous vehicles will be able to keep both passengers, pedestrians, and wildlife safe. Autonomous vehicles of the future must be able to navigate based on both an assumed path and a relative location in order to efficiently and safely navigate dynamic environments.  
 \begin{figure}
 \begin{center}
 \includegraphics[width=3in]{\myroot/figures/proposal-fig2.png}
 \end{center}
 \caption{An autonomous car sensing its environment}
-\label{fig2}
+\label{fig:2}
 \end{figure}
 
 As the first autonomous drone-racing project at USNA, this will open the door to future drone research for midshipmen. EW281 and EW282 provide opportunities for midshipmen to experiment with drones on a hardware and flight-testing level, but this project will allow for future drone development on the software and autonomy level. Additionally, this research is only the first step in creating a fully autonomous racing drone that rivals a human’s performance. Future steps include path optimization, recognition with visual uncertainties, racer collision avoidance, etc. This research will be one small step in the larger picture of fully autonomous drone racing.
@@ -54,7 +62,7 @@ Given a three-dimensional flight path, drone accelerometer readings, and the ima
 
 \begin{figure}
 \caption{Depiction of flight path correction (original path in green, new path in blue, trajectory at gate intersection as red arrow, gate intersection point as red dot)}
-\label{fig-problem-statement}
+\label{fig:problem-statement}
 \end{figure}
 
 % OLD REMOVED BY AC 3 MAY 2019
@@ -120,15 +128,15 @@ While recognizing a gate head on in a simulated environment may not be incredibl
 \subsection{Experimental work}
 %WIP
 %Crabbe ai, human testing
-The second phase of demonstration for this project includes proof-of-concept experiments of a drone flying through single and multi-gate racecourses. First, a single gate course will be created in order to test ``locate, identify, and modify path'' with real world factors. The drone will be set to take off from a flat surface, recognize a gate placed in front of it, modify its flight path to fly through the gate, and then land on a flat surface. The test will then be modified by moving the gate from directly in front of the drone to different locations so the drone can be shown recognizing and flying through different approach angles. Next, a multi-gate course will be created (2--5 gates) in which the drone will fly through the gates in sequential order. Sequential order is important as it shows the recognition programs capability of distinguishing which gate is closer, in turn recognizing the correct order of gates.  While initial multi gate testing will be conducted with the gates in a straight line, the gates will eventually be configured in curved and staggered patters (see Figures~\ref{fig-gate-style-1} and \ref{fig-gate-style-2} below). These tests are the closes to drone racing that this project will go, as demonstrating multi-gate recognition is subsequent for basic drone racing. In the future, this project could be utilized for a high speed-racing drone, which would need better flight recognition capabilities (seeing gates at long distances or flying towards gates outside of the cameras line of sight), but for this project, simple gate testing will be sufficient.
+The second phase of demonstration for this project includes proof-of-concept experiments of a drone flying through single and multi-gate racecourses. First, a single gate course will be created in order to test ``locate, identify, and modify path'' with real world factors. The drone will be set to take off from a flat surface, recognize a gate placed in front of it, modify its flight path to fly through the gate, and then land on a flat surface. The test will then be modified by moving the gate from directly in front of the drone to different locations so the drone can be shown recognizing and flying through different approach angles. Next, a multi-gate course will be created (2--5 gates) in which the drone will fly through the gates in sequential order. Sequential order is important as it shows the recognition programs capability of distinguishing which gate is closer, in turn recognizing the correct order of gates.  While initial multi gate testing will be conducted with the gates in a straight line, the gates will eventually be configured in curved and staggered patters (see \fref{fig:gate-style-1} and \ref{fig:gate-style-2} below). These tests are the closes to drone racing that this project will go, as demonstrating multi-gate recognition is subsequent for basic drone racing. In the future, this project could be utilized for a high speed-racing drone, which would need better flight recognition capabilities (seeing gates at long distances or flying towards gates outside of the cameras line of sight), but for this project, simple gate testing will be sufficient.
 \begin{figure}
 \caption{Depiction of multi-gate racecourse style 1}
-\label{fig-gate-style-1}
+\label{fig:gate-style-1}
 \end{figure}
 
 \begin{figure}
 \caption{Depiction of multi-gate racecourse style 2}
-\label{fig-gate-style-2}
+\label{fig:gate-style-2}
 \end{figure}
 
 For the physical experiments, standard drone racing specifications will be maintained to the extent practicable. Lockheed Martin currently has a drone racing competition, known as the AlphaPilot Challenge, which requires specific drone specifications (power supplies, drone size, motor power, etc.). MultiGP is another drone racing format to be used within the USNA EW281/282 pipeline and AMA events.  As these specifications are published, they will be maintained within this project, and it is assumed that these specifications will meet the requirements for powering, computing, and sensing within this project.
@@ -151,7 +159,7 @@ Due to the innate troubles with high-speed drone flight, there is always the ris
 
 
 \subsection{Time risks and mitigation}
-The timeline for this project can be found in appendix~\ref{app:gantt}. The main portions of the projects include relearning python, writing code, integrating inputs, simulation testing, single gate experimental testing, and multiple gate experimental testing. The biggest time risk is in the coding and input integration. While not ideal, experimentation and simulation can be done simultaneously; however, both require working code. If the control algorithm takes longer to create than planned, it would push back simulations and experimentation. This is mitigated by allow more than ample time to run physical experiments, so if both simulation and experimental testing are pushed back, experimental testing can take a time hit without suffering.
+The timeline for this project can be found in appendix~\ref{app:gantt}. The main portions of the projects include relearning Python, writing code, integrating inputs, simulation testing, single gate experimental testing, and multiple gate experimental testing. The biggest time risk is in the coding and input integration. While not ideal, experimentation and simulation can be done simultaneously; however, both require working code. If the control algorithm takes longer to create than planned, it would push back simulations and experimentation. This is mitigated by allow more than ample time to run physical experiments, so if both simulation and experimental testing are pushed back, experimental testing can take a time hit without suffering.
 
 
 
@@ -161,10 +169,10 @@ This research will be conducted using Python, as it allows for high level contro
 
 
 \subsection{Budget}
-In order to conduct the physical experiment demonstrations, a set of drones and race-gates are necessary. The drone required a single camera, an IMU, and a flight controller. The DJI Tello drone was selected as it has all of the required parts and is easily programmable. The DJI Tello is already being used at USNA for capstone projects \cite{cuniff2019}, so there are readily available resources to help in the event that the drone breaks or malfunctions. In addition, the Vortex 180 drone was selected because it is a smaller standard sized racing drone and it fits all of the requirements for this research and is already in use in USNA SWAT-C and EW281. This drone will allow the research to get as close to true drone racing conditions as possible. Finally, the TBS gates were selected as they are sized for indoor drone racing and come with programmable lights. The lights allow for easy gate recognition during the first stages of experimental work as the lights in the testing room can be turned off and the gate lights turned on. This removed the background environment from the drone’s field of view, making gate recognition easier. The total labor, overhead, and material costs can be seen in Table~\ref{table-budget}A, and the breakdown of the out of pocket costs for materials can be seen in Table~\ref{table-budget}B.
+In order to conduct the physical experiment demonstrations, a set of drones and race-gates are necessary. The drone required a single camera, an IMU, and a flight controller. The DJI Tello drone was selected as it has all of the required parts and is easily programmable. The DJI Tello is already being used at USNA for capstone projects \cite{cuniff2019}, so there are readily available resources to help in the event that the drone breaks or malfunctions. In addition, the Vortex 180 drone was selected because it is a smaller standard sized racing drone and it fits all of the requirements for this research and is already in use in USNA SWAT-C and EW281. This drone will allow the research to get as close to true drone racing conditions as possible. Finally, the TBS gates were selected as they are sized for indoor drone racing and come with programmable lights. The lights allow for easy gate recognition during the first stages of experimental work as the lights in the testing room can be turned off and the gate lights turned on. This removed the background environment from the drone’s field of view, making gate recognition easier. The total labor, overhead, and material costs can be seen in \fref{tab:budget}A, and the breakdown of the out of pocket costs for materials can be seen in \fref{tab:budget}B.
 \begin{table}[hbp]
 \caption{(a) Labor, overhead, and materials costs. (b) Out of pocket costs.}
-\label{table-budget}
+\label{tab:budget}
 \begin{center}
 \includegraphics[width=3in]{\myroot/figures/proposal-table1.png}
 \includegraphics[width=3in]{\myroot/figures/proposal-table2.png}
