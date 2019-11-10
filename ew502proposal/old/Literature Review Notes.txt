@@ -1,0 +1,214 @@
+﻿Autonomous Drone Racing
+MIDN: Credle
+Advisor: Evangelista
+
+
+
+
+Paper Identifier:  Perception, Guidance, and Navigation for Indoor
+Autonomous Drone Racing Using Deep Learning. Jung 2018. 
+
+
+URL: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8299437
+
+
+Process: Having the drone distinguish between 2 gates that are both within the field of view for the drone using only the onboard processor.
+
+
+Properties: The paper wanted to demonstrate that a modified neural network could be used to process gate recognition onboard the drones processor. This was done by taking a conventional neural network analysis and removing many layers that were not going to be met within the parameters of drone racing (such as finding gates in far distances, finding things that were not the shape of the gate, etc.) so that the processor response rate was efficient enough to react in the range of 20-60 microseconds.
+
+
+Demonstration: The modified gate recognition architecture was demonstrated using live drone testing with both the onboard processor, and a desktop computer. Each processor was given the same images and footage to process, while 3 different gate recognition architectures were tested. It was shown that the modified architecture had a 10% lower accuracy that a full neural architecture, but could process over 10 times faster (464ms to 34ms).
+
+
+Relevance : This is incredibly important to my project because efficient gate recognition is likely going to be the most difficult part of the project. The work done in this project shows that it is possible to effectively recognize multiple gates in one image, and have the drone pass through the proper gate.
+
+
+Strengths: I can emulate almost all of this. While understanding their neural network may be a bit complex, the drone position software and drone hardware in general can easily be recreated. It may even be possible to create a larger version of the drone to allow for a larger processor
+
+
+Weaknesses:
+While modifications were made to an existing recognition network, I believe it is possible to reshape the gates (modify their design and color) to make recognition even easier. This would allow for the computer to process faster and ultimately put the drones response times on par with a humans
+
+
+
+
+
+
+
+
+Paper Identifier: The use of convolution artificial neural networks for drones autonomous trajectory planning. Zhilenkov, 2018
+
+
+
+
+
+
+URL: https://ieeexplore.ieee.org/document/8317268
+
+
+Process: The authors proposed a 3 camera system (1 centered, and 2 offset at 30 degrees) to allow the artificial network to best understand the surroundings and learn to create paths through wooded areas
+
+
+Properties: They wished to demonstrate that a 3 cameraed network could be designed to all for a neural network to best understand a wooded environment.
+
+
+Demonstration: While this wasnt a full experiment, it was shown through theoretical design layouts that a neural network could be created to learn how to navigate difficult terrains. This was purely theoretical, but could be used in a future demonstration
+
+
+Relevance : This is important to my project because I will need to navigate a drone through a dense and changing environment. The drone will need to recognize proper flight patterns necessary to reach the next gate, which is similar to the design of this project, but instead of avoiding trees, I will be aiming at a gate.
+
+
+Strengths: This paper was nice in that it provided a layout for the creation of a drone to understand an environment and react to it, both in hardware design and neural network design.
+
+
+Weaknesses: This paper fails in that it doesnt actually test how their design, and I could easily progress this work by testing it with demonstration. While I likely wont spend my project in this specific area, I likely will use pieces of this porject, and implement them on a simpler basis. I will also have to reduce the processing power of my system, so I can also develop this into a faster processing system
+
+
+
+
+Paper Identifier: Svacha, 2017. Improving quadrotor trajectory tracking by compensating for aerodynamic effects
+
+
+URL: https://ieeexplore.ieee.org/abstract/document/7991501
+
+
+Process: The authors developed straight flight, constant velocity quadcopter flights, where induced drag and thrust forces could be modeled accurately. There were 2 flight experiment types: forward velocity, and vertical velocity. A small quadcopter was flown 25 times in each test type, and the velocities were recorded to model against the calculated values.
+
+
+Properties: This research identified a set of equations that could be used to accurately model the induced drag and thrust forces. These equations were derived from properties of physics, and then coefficients were identified for these equations by use of flight experimentation
+
+
+Demonstration: Experimentation, theoretical modeling
+
+
+Relevance : This is very important for my project because I need to be able to accurately predict the location of my racing drone. If the processor is attempting to calculate future paths, it needs to know its current location. These equations and controllers displayed and proved in this research makes it much easier to accurately predict the current location of the racing drone
+
+
+Strengths: This paper is very proof heavy, and does a great job of working through the physical equations of motion present in a constant velocity drone. I can easily emulate the results by implementing their controller and equations of motion into my processor.
+
+
+Weaknesses: While this paper is very helpful in constant velocity flight, racing quadcopter is rarely going to be at a constant velocity. I will have to expand this research beyond the 1D realm, and use their research to more accurately predict the 3D movements of a racing drone
+
+
+
+
+Paper Identifier: Kennedy, 2017. Optimal Paths for Polygonal Robots in SE(2)
+
+
+
+
+URL: https://mechanismsrobotics.asmedigitalcollection.asme.org/article.aspx?articleid=2670076
+
+
+Process: The researchers use SE(2) to find viable paths that a drone could fly with an obstacle filled space. The program evaluate the dynamics of the drone and the objects in a given cluttered space, then created seed paths for the drone that would navigate it through the terrain.
+
+
+Properties: They wished to demonstrate that the SE(2) program could be used to create seed paths for a drone that were viable, and then find an optimized path for it to fly
+
+
+Demonstration: This was demonstrated through simulation
+
+
+Relevance : This is important for my project because my drone is going to have to navigate a difficult terrain and find the optimal path in order to beat a human racer. The optimization methods used here are definitely helpful in recreating it for a race
+
+
+Strengths: This paper is strong in it development of a technique to optimize a route, and I should be able to replicate this
+
+
+Weaknesses: This paper is nice that it works on optimization, but fails practicalilty in that it only works for 2D terrains. I will have to develop their methods to include the 3rd dimension.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Round 2
+
+
+
+
+Paper Identifier:  A direct visual servoing-based framework for the 2016 IROS
+Autonomous Drone Racing Challenge
+
+
+URL: In Lit Review Folder
+
+
+Process: This paper is a recap/summary of the 2016 IROS Autonomous Drone Racing championship team and the process they created to create an autonomous racing drone.
+
+
+Properties: This paper demonstrated a simplified visual servo mixed with a pre-planned track in order for a drone to navigate the course autonomously.
+
+
+Demonstration: This was a physical demonstration in competition, this is the winning team.
+
+
+Relevance : This is important for my project because they have completed a visual servoing and pre-flight path mix, which is what I plan to do for this project. I plan to create a better gate recognition capability in a simpler, novel form, but this is the expanded version of my project.
+
+
+Strengths: The gate recognition concept this team used is very easy to understand and can easily be replication. I will use this work extensively.
+
+
+Weaknesses: This team used a larger drone that I will have, and the processing was done onboard. I plan to improve on this by using a smaller drone with off-board processing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Paper Identifier:  Estimation, Control, and Planning for Aggressive
+Flight With a Small Quadrotor With a Single Camera and IMU
+
+
+URL: In Lit Review Folder
+
+
+Process: The process for this paper was creating a state equation set that could accurately model the movement of the small UAV, then test it against an actual UAV.
+
+
+Properties: This paper provides a robust state estimation for a small quadrotor with a single camera and IMU, as well as planning for 3D trajectories for slalom paths.
+
+
+Demonstration: This was demonstrated by modeling, then testing against a real drone
+
+
+Relevance : This is important for my project because it lays an accurate framework for modeling the movement of the drone through a extreme maneuver, such as banking into a gate. Most of my project will be focused around the gate, which include tight turns, and this project models these types of difficult maneuvers.
+
+
+Strengths: I will definitely be able to replicate/ use their state estimation for position, especially through difficult maneuvers. Most of their movements are built in the horizontal plane, which I can easily build on (this will be the bulk of my project).
+
+
+Weaknesses: This paper rarely moves into 3D. They maintain an elevation, but they dont experiment with rapid upward or downward movement. I can easily adapt their information and data into a 3D model
