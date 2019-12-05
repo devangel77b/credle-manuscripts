@@ -104,7 +104,7 @@ capstone, robotics, controls
 \begin{center}
 \includegraphics[width=4.14in]{fig1.png}
 \end{center}
-\caption{Two drones racing}
+\caption{Two drones racing, from \cite{someone}}
 \label{fig:1}
 \end{figure}
 
@@ -115,7 +115,7 @@ By mixing both an assumed path and gates for the drone to fly through, the exact
 \begin{center}
 \includegraphics[width=3.90in]{fig2.png}
 \end{center}
-\caption{An autonomous car sensing its environment}
+\caption{An autonomous car sensing its environment, from \cite{someone}}
 \label{fig:2}
 \end{figure}
 
@@ -161,26 +161,38 @@ The methods for proof-of-concept included three main phases: (1) Tello drone fli
 The original budgeted proposal called for four Tello drones, two Vortex 180 drones, and two sets of LED race gates, as seen in tables~\ref{tab:1} and \ref{tab:2}. Upon receiving the four Tello drones, it was found that their preprogrammed flight controls had a minimum movement requirement per command of \SI{20}{\milli\meter}. To best utilize the Tello drones and calculate the future path correction accuracy, a larger gate became more advantageous. The USNA School of Drones has a single, yellow-colored, \SI{5x5}{\foot} standard MultiGP drone racing race gate, so the smaller LED race gates have been substituted. The Vortex 180 drones have not been purchased as they are apart of the stretch goal for this research, and will not be utilized until the spring.
 
 \subsection{Tello drone first flight test}
-For Tello drone flight, the first phase was to connect to the Tello drones flight controls in any manner possible to understand its capabilities. The easiest method was a connection over a smartphone through an app developed by DJI through the Tello’s Wi-Fi. Upon completion of this flight, focus was shifted to flight under computer control. A Python program was written utilizing the base code provided by DJI (CITE HERE) to open a socket between the drone and Linux terminal. This connection was also established over the Tello drones Wi-Fi. The Tello is preprogramed to receive text commands over the socket and perform a take-off maneuver, landing maneuver, or translational/ rotational movements. Each of the preprogrammed commands were tested and verified to operate according to the DJI operational instructions \cite{tello-manual}.
-
-Give pseudocode here and link to repository containing the code. 
+For Tello drone flight, the first phase was to connect to the Tello drones flight controls in any manner possible to understand its capabilities. The easiest method was a connection over a smartphone through an app developed by DJI through the Tello’s Wi-Fi. Upon completion of this flight, focus was shifted to flight under computer control. A Python program (excerpt in \fref{fig:pseudocode1}, full code at \url{https://github.com/devangel77b/credle-2020-code}) was written utilizing the base code provided by DJI (\url{https://github.com/dji-sdk/Tello-Python}) to open a socket between the drone and Linux terminal. This connection was also established over the Tello drones Wi-Fi. The Tello is preprogramed to receive text commands over the socket and perform a take-off maneuver, landing maneuver, or translational/ rotational movements. Each of the preprogrammed commands were tested and verified to operate according to the DJI operational instructions \cite{tello-manual}.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for Tello drone flight from host terminal.}
+\label{fig:pseudocode1}
+\lstinputlisting[language=python]{tello-flight.py}
+\end{figure}
 
 \subsection{Video streaming from Tello test}
-For Tello video streaming to a computer, a python program was developed using the base code provided by DJI (CITE HERE) to connect the Tello’s on-board camera to the same Linux system. This worked in a similar manner to the flight controls by connecting over the Tello’s Wi-Fi using a socket connection, but differed in the required port connection. The connection allowed the computer to receive real-time flight video data, which was converted using an h264 decoder. The video stream was then integrated into a GUI for ease of viewing, and tested to ensure minimal connection lag and accurate color imaging.
-
-Give pseudocode here and link to repository containing the code. 
+For Tello video streaming to a computer, a Python program was developed using the base code provided by DJI (\url{https://github.com/dji-sdk/Tello-Python}) to connect the Tello’s on-board camera to the same Linux system (excerpt in \fref{fig:pseudocode2}, full code at \url{https://github.com/devangel77b/credle-2020-code}). This worked in a similar manner to the flight controls by connecting over the Tello’s Wi-Fi using a socket connection, but differed in the required port connection. The connection allowed the computer to receive real-time flight video data, which was converted using an h264 decoder. The video stream was then integrated into a GUI for ease of viewing, and tested to ensure minimal connection lag and accurate color imaging.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for video streaming from a Tello.}
+\label{fig:pseudocode2}
+\lstinputlisting[language=python]{video-stream.py}
+\end{figure}
 
 \subsection{Gate recognition}
-For computer gate recognition, the drone's onboard camera was utilized so that integration of the previous step was not required. A Python program was developed to view the real-time camera data and segment it based on HSV color segmenting (REFERENCES). Appropriate values were found to segment out all colors other than the yellow/gold of the actual race gate, and visual race gate created using a sticky-note on a black board. The segmented sections of the video feed were then connected and analyzed for size. Small clumps were removed in an attempt to keep only the race gate. The remaining objects in the image were then analyzed for their number of edges. Knowing that the race gate has eight edges, any shape without 8 edges was removed. This left only the race gate in the segmented imaging.
-
-Give pseudocode here and link to repository containing the code. 
+For computer gate recognition, the drone's onboard camera was utilized so that integration of the previous step was not required. A Python program (excerpt in \fref{fig:pseudocode1}, full code at \url{https://github.com/devangel77b/credle-2020-code}) was developed to view the real-time camera data and segment it based on HSV color segmenting \cite{bradski2008learning}. Appropriate values were found to segment out all colors other than the yellow/gold of the actual race gate, and visual race gate created using a sticky-note on a black board. The segmented sections of the video feed were then connected and analyzed for size. Small clumps were removed in an attempt to keep only the race gate. The remaining objects in the image were then analyzed for their number of edges. Knowing that the race gate has eight edges, any shape without 8 edges was removed. This left only the race gate in the segmented imaging.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for automatic gate recognition.}
+\label{fig:pseudocode3}
+\lstinputlisting[language=python]{gate-recognition.py}
+\end{figure}
 
 
 
 
 
    
-
+\clearpage
 \section{Results}
 
 \section{Tello drone first flight test}
@@ -189,7 +201,7 @@ Drone flight was successfully controlled by the computer and could be maintain f
 \begin{center}
 \includegraphics[width=4.06in]{fig4.png}
 \end{center}
-\caption{Combination of video frames filming a right flip maneuver of the Tello drone with computer controls.}
+\caption{Combination of video frames filming a right flip maneuver of the Tello drone with computer controls. How many frame per second. Add scale bar and callouts.}
 \label{fig:4}
 \end{figure}
 
@@ -199,7 +211,7 @@ The Tello drone built-in camera was successfully connected to the Linux terminal
 \begin{center}
 \includegraphics[width=3.96in]{fig5.png}
 \end{center}
-\caption{Tello drone streaming video to Linux system}
+\caption{Tello drone streaming video to Linux system. Add scale bar and callouts.}
 \label{fig:5}
 \end{figure}
 
@@ -229,7 +241,7 @@ In conclusion, this research began to create a process for a drone to modify its
 
 
 \section*{Acknowledgements}
-We thank MIDN 1/C Ethan Marcello and the KEF Robotics team competing in the Lockhood Martin Alpha Pilot Challenge for helpful comments which were incorporated into this proposal. We thank 2Lt Canlas and 2Lt Cunniff for their advice and suggestions.
+We thank MIDN 1/C Ethan Marcello and the (spell out acronym) (KEF) Robotics team competing in the Lockhood Martin Alpha Pilot Challenge for helpful comments which were incorporated into this proposal. We thank 2Lt Canlas and 2Lt Cunniff for their advice and suggestions.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,\myroot/references/credle}
