@@ -1,0 +1,153 @@
+\section{Materials and methods}
+The methods for proof-of-concept included three main phases: (1) Tello drone flight by computer; (2) Tello video streaming to computer; and (3) computer gate recognition. These three sections were developed separately in the Fall of 2019. In the Spring of 2020, the three phases were integrated in two additional phases: (4) combining gate detection with the live video feed from the Tello, and (5) full system integration to turn towards and navigate through the gate. Each is operated by a separate Python program (version 3.6.9, \url{https://www.python.org/}) on the same Linux system (Ubuntu 18.04LTS, \url{https://ubuntu.com/}). All code for this project is provided in the Github repository at \url{https://github.com/devangel77b/credle-2020-code}. 
+
+
+
+
+\subsection{Drone racing hardware}
+The original budgeted proposal called for four Tello drones, two Vortex 180 drones, and two sets of LED race gates. Upon receiving three Tello drones, it was found that their preprogrammed flight controls had a minimum movement requirement per command of \SI{20}{\milli\meter}. To best utilize the Tello drones and calculate the future path correction accuracy, a larger gate became more advantageous. The USNA School of Drones has a single, yellow-colored, \SI{5x5}{\foot} standard MultiGP drone racing race gate, so the smaller LED race gates were to be substituted, however, due to the global COVID-19 pandemic, these were not available. Testing was instead accomplished with yellow paper targets. The Vortex 180 drones have not been purchased as they were apart of the stretch goal for this research, which was not attempted due to the global COVID-19 pandemic.
+
+
+
+
+
+\subsection{Phase 1: Tello drone first flight test}
+For Tello drone flight, the first phase was to connect to the Tello drones flight controls in any manner possible to understand its capabilities. The easiest method was a connection over a smartphone through an app developed by DJI through the Tello’s Wi-Fi. Upon completion of this flight, focus was shifted to flight under computer control. A Python program (excerpt in \fref{fig:pseudocode1}, full code at \url{https://github.com/devangel77b/credle-2020-code}) was written utilizing the base code provided by DJI (\url{https://github.com/dji-sdk/Tello-Python}) to open a socket between the drone and Linux terminal. This connection was also established over the Tello drones Wi-Fi. The Tello is preprogramed to receive text commands over the socket and perform a take-off maneuver, landing maneuver, or translational/ rotational movements. Each of the preprogrammed commands were tested and verified to operate according to the DJI operational instructions \cite{tello-manual}.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for Tello drone flight from host terminal.}
+\label{fig:pseudocode1}
+\lstinputlisting[language=python]{code/tello-flight.py}
+\end{figure}
+
+
+
+
+
+
+\subsection{Phase 2: Video streaming from Tello test}
+For Tello video streaming to a computer, a Python program was developed using the base code provided by DJI (\url{https://github.com/dji-sdk/Tello-Python}) to connect the Tello’s on-board camera to the same Linux system (excerpt in \fref{fig:pseudocode2}, full code at \url{https://github.com/devangel77b/credle-2020-code}). This worked in a similar manner to the flight controls by connecting over the Tello’s Wi-Fi using a socket connection, but differed in the required port connection. The connection allowed the computer to receive real-time flight video data, which was converted using an h264 decoder. The video stream was then integrated into a GUI for ease of viewing, and tested to ensure minimal connection lag and accurate color imaging.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for video streaming from a Tello.}
+\label{fig:pseudocode2}
+\lstinputlisting[language=python]{code/video-stream.py}
+\end{figure}
+
+
+
+
+
+\subsection{Phase 3: Gate recognition}
+For computer gate recognition, the drone's onboard camera was utilized so that integration of the previous step was not required. A Python program (excerpt in \fref{fig:pseudocode1}, full code at \url{https://github.com/devangel77b/credle-2020-code}) was developed to view the real-time camera data and segment it based on HSV color segmenting \cite{bradski2008learning}. Appropriate values were found to segment out all colors other than the yellow/gold of the actual race gate, and visual race gate created using a sticky-note on a black board. The segmented sections of the video feed were then connected and analyzed for size. Small clumps were removed in an attempt to keep only the race gate. The remaining objects in the image were then analyzed for their number of edges. Knowing that the race gate has eight edges, any shape without 8 edges was removed. This left only the race gate in the segmented imaging.
+%Give pseudocode here and link to repository containing the code. 
+\begin{figure}
+\caption{Code snippet for automatic gate recognition.}
+\label{fig:pseudocode3}
+\lstinputlisting[language=python]{code/gate-recognition.py}
+\end{figure}
+
+Due to the global COVID-19 pandemic, the final phases of system integration did not have access to the full sized \SI{5x5}{\foot} standard race gate, so a yellow piece of paper of approximately the same shade was used, trimmed with the same aspect ratio but scaled down. 
+
+
+
+
+
+\subsection{Phase 4: Combining video streaming and gate detection}
+In phase 4, I added gate detection to the Tello live video stream.  Addition of the gate detection function into the video streaming code was accomplished by modifying the \lstinline{TelloUI.videoLoop()} method in \lstinline{tello_control_ui.py} to include a call to a video processing function as follows:
+\begin{lstlisting}[language=python]
+            # read the frame for GUI show
+                self.frame = self.tello.read()
+                if self.frame is None or self.frame.size == 0:
+                    continue 
+
+            	#currently a np array under self.frame, thrown through processing after being pulled but before being put into the gui
+		
+                self.frame=self.video_process(self.frame)
+\end{lstlisting}
+
+The actual video processing works similar to Phase 2 code. The live image from the Tello was converted to hue-saturation-value colorspace using \lstinline{cv2.cvtColor()}, thresholded using \lstinline{cv2.inRange()}, and filtered using a \num{5x5} erosion operation implemented with \lstinline{cv2.erode()}. This provided a filtered binary image that could be processed later for centroid and size:
+\begin{lstlisting}[language=python]
+   def video_process(self, image):
+	    #basic thresholding code pulled from gate recognition
+	    #sees blue? 
+	    
+	    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+	    lower_red = np.array([85, 100, 94])
+	    upper_red = np.array([100, 168, 255])
+
+	    mask = cv2.inRange(hsv, lower_red, upper_red)
+	    kernel = np.ones((5,5), np.uint8)
+	    image = cv2.erode(mask, kernel)
+
+	    return image
+\end{lstlisting}
+
+
+
+
+
+\subsection{Phase 5: Full system integration}
+Final system integration was accomplished by adding autonomous control to the code from Phase 4. I added two additional attributes to the \lstinline{TelloUI} object, \lstinline{TelloUI.degree} and \lstinline{TelloUI.distance}, representing an increment to turn or move forward, respectively. The pseudocode to detect and navigate a gate then becomes:
+\begin{lstlisting}
+find binary image
+compute moments for the binary image
+if the image is not zero: 
+  if the gate is centered:
+    move forward
+  else (the gate is left)
+    turn left 
+  else 
+    turn right
+else continue
+\end{lstlisting}
+
+In Python, this takes the form of a new \lstinline{TelloUI.video_analyze()} method that is called after the call to \lstinline{video_process()}:
+\begin{lstlisting}[language=python]
+    def video_analyze(self, image):
+	    #finding center of mask
+
+	    #im2,contours,hierarchy = cv.findContours(image, 1, 2)
+	    #cnt = contours[0]
+	    M=cv2.moments(image)
+
+# if one of these is 0, skip
+#paper in front of tello, move paper, tello moved
+#if centerd for a few seconds, move forward
+	    
+	    if M['m00'] !=0:
+		cx=int(M['m10']/M['m00'])
+	    	cy=int(M['m01']/M['m00'])
+	    	if cx>240 and cx<480:
+			#print("middle")
+			self.countl=0
+			self.countr=0
+			self.countm=self.countm+1
+			if self.countm==200:
+				self.tello.move_forward(.2)
+				print("moving")
+				self.countm=0
+	    	elif cx<=240:
+			#print("left")
+			self.countm=0
+			self.countr=0
+			self.countl=self.countl+1
+			if self.countl==200:
+				self.tello.rotate_ccw(self.degree)
+				print("moving")
+				self.countm=0
+			
+		else:
+			#print("right")
+			self.countm=0
+			self.countl=0
+			self.countr=self.countr+1
+			if self.countr==200:
+				self.tello.rotate_cw(self.degree)
+				print("moving")
+				self.countr=0
+	    else:
+		print("no image")
+\end{lstlisting}
+

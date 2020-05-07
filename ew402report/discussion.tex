@@ -1,0 +1,15 @@
+\section{Discussion}
+
+\subsection{Successful first steps towards autonomous drone racing}
+This work was initiated with the hope of taking some first steps towards autonomous drone racing at the US Naval Academy. I was successful in making a Tello drone autonomously detect and navigate through a small yellow paper gate. I proceeded in steps from making the Tello fly from an offboard computer, detecting the gate in imagery, then combining it with the Tello's onboard video feed, before finally integrating it with the flight control system via high level motion primitives to check for gate centroid and turn or move forward. This allows for the drones relative location to the gate to be calculated and integrated with the flight controls to pass through the gate.
+
+\subsection{Study limitations}
+Obviously, the use of color thresholding is a simplification that is not possible in standard autonomous drone racing league events, where gates are multicolored and possess logos and patterns as well as more complex lighting.  My code does not consider the possibility of multiple gates in view, though it is able to handle the lack of a gate in view (as occurs at the instant of passing through it). 
+
+The Tello drone used moves quite slowly and thus the speed of offboard image processing and control are not an issue. At actual drone racing speeds, latency could be a major risk. In addition, other projects (e.g. MIDN 1/C Marcello's work) have shown that as speeds increase, the use of simplistic position-based path planning top level control with lower level autopilots is likely to become performance limited; in human drone race pilots this necessitates use of ACRO mode vice (automatic) LEVEL. 
+
+My path planning is only the most simple case of moving towards the centroid, as is used in our EW309 Guided Design Class nerf gun turrets. A more complex race algorithm should attempt to select a fast line through the turn, using knowledge of ownship position, the gate, as well as the course to the next gate after clearing the current one. 
+
+\subsection{Additional thoughts}
+In conclusion, this research began to create a process for a drone to modify its flight path based on the visual recognition of racing gates. This is the first steps in the process to create a fully autonomous racing drone. Future steps will include path optimization and processing optimization. The process for this research includes identify the gate, locate it in relations to the drone, and modify the flight path to fly through the gate. The processor will have a visual feed, the three dimensional acceleration data of the drone’s flight, and the pre-determined three-dimensional path. The process will output a new three-dimensional path for the drone to follow in order to fly through the gate. This project demonstrates this process using physical experiments to refine and optimize the program and measure results. Success is measured by the accuracy of the new three-dimensional path as it passes through the gate. Accuracy is based on the difference in distance of the path and the center of the gate. 
+

@@ -1,0 +1,58 @@
+\section{Results}
+
+\subsection{Phase 1: Tello drone first flight test}
+Drone flight was successfully controlled by the computer and could be maintain for approximately \SI{4}{\minute} on a single battery. All pre-programmed maneuvers were tested and performed as described. \Fref{fig:4} depicts the right flip maneuver in action.
+\begin{figure}
+\begin{center}
+\includegraphics[width=4.06in]{figures/fig4.png}
+\end{center}
+\caption{Combination of video frames filming a right flip maneuver of the Tello drone with computer controls. How many frame per second. Add scale bar and callouts.}
+\label{fig:4}
+\end{figure}
+
+\subsection{Phase 2: Tello video stream test}
+The Tello drone built-in camera was successfully connected to the Linux terminal. \Fref{fig:5} depicts the active connection between the two systems. 
+\begin{figure}
+\begin{center}
+\includegraphics[width=3.96in]{figures/fig5.png}
+\end{center}
+\caption{Tello drone streaming video to Linux system. Add scale bar and callouts.}
+\label{fig:5}
+\end{figure}
+
+\subsection{Phase 3: Gate recognition}
+The Python program successfully recognized a drone race gate through color segmentation and edge recognition. The program both segmented out incorrect gate colors, objects too small to be the gate, and objects with too many or too few edges to be the gate. \Fref{fig:6} depicts both the segmented image and the original image with identified edges overlaid.
+\begin{figure}
+\begin{center}
+\includegraphics[width=3.97in]{figures/fig6.png}
+\end{center}
+\caption{Gate recognition program segmenting for gate color and projecting edges on gate in non-segmented image.}
+\label{fig:6}
+\end{figure}
+
+\subsection{Phase 4: Combining video steeaming and gate detection}
+Combination of the Tello video streaming and image processing to recognize the gate using color thresholding was successful. \Fref{fig:7} depicts the improvised setup using a yellow piece of paper, necessary due to the global COVID-19 pandemic, as well as the program successfully detecting it. 
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.3\columnwidth]{figures/IMG_2235.png}
+\includegraphics[width=0.3\columnwidth]{figures/IMG_2236.png}
+\end{center}
+\caption{Gate recognition program segmenting for gate color running online with live video feed from the Tello.}
+\label{fig:7}
+\end{figure}
+
+\subsection{Phase 5: Final system integration}
+Fully autonomous gate detection and navigation was successful. \Fref{fig:8} shows successive screenshots of the approach to a gate, and turning to a new gate position/
+\begin{figure}
+\begin{center}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h08m57s743.png}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h09m07s372.png}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h09m15s197.png}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h09m20s279.png}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h09m27s534.png}
+\includegraphics[angle=-90,width=0.15\columnwidth]{figures/vlcsnap-2020-05-07-11h09m33s534.png}
+\end{center}
+\caption{Successful online detection and navigation of an improvised gate. (a-d) Tello makes steady approach to a gate; (e, f) Tello turns when gate is turned.}
+\label{fig:8}
+\end{figure}
+
